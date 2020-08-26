@@ -36,20 +36,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Install Pivnet & PKS
-        run: |
-          sudo apt-get update
-          wget -O pivnet github.com/pivotal-cf/pivnet-cli/releases/download/v0.0.55/pivnet-linux-amd64-0.0.55 && chmod +x pivnet && sudo mv pivnet /usr/local/bin
-          pivnet login --api-token=${{ secrets.PIVNET_API_TOKEN }}
-          pivnet download-product-files --product-slug='pivotal-container-service' --release-version='1.7.0' --product-file-id=646536
-          sudo mv pks-linux-amd64-1.7.0-build.483 pks
-          chmod +x pks
-          sudo mv pks /usr/local/bin/
       - name: Install Kubectl
         run: |
-          pivnet download-product-files --product-slug='pivotal-container-service' --release-version='1.7.0' --product-file-id=633728
-          sudo mv  kubectl-linux-amd64-1.16.7 kubectl
-          sudo mv kubectl /usr/local/bin/
+          sudo apt-get update
+          curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+          kubectl version --client
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
