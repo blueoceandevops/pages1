@@ -57,10 +57,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
       - name: EKS Login
-          run: |
-            aws eks --region ap-south-1 update-kubeconfig --name dees-cloud
-            kubectl config get-contexts
-            kubectl apply -f deployment/pages-namespace.yaml
-            kubectl apply -f deployment/pages-config.yaml
-            kubectl apply -f deployment/pages-service.yaml
-            kubectl apply -f deployment/pages-deployment.yaml
+        run: |
+          aws eks --region ap-south-1 update-kubeconfig --name dees-cloud
+          kubectl config get-contexts
+          kubectl apply -f deployment/pages-namespace.yaml
+          kubectl apply -f deployment/pages-config.yaml
+          kubectl apply -f deployment/pages-service.yaml
+          kubectl apply -f deployment/pages-deployment.yaml
