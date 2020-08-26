@@ -4,7 +4,7 @@ metadata:
   labels:
     app: pages
   name: pages
-  namespace: [student-name]
+  namespace: nagendra
 spec:
   replicas: 1
   selector:
